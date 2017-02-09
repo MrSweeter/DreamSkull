@@ -1,0 +1,5 @@
+# DreamSkull
+
+# Chance to drop: %
+loot_chance: 25
+send_message: true

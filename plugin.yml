@@ -1,0 +1,15 @@
+name: DreamSkull
+main: com.MrSweeter.DreamSkull.DreamSkull
+version: 1.0
+author: MrSweeter / SweetDream
+description: Drop a custom head to death
+
+commands:
+    dsreload:
+        description: Reload config !
+        usage: /dsreload
+
+permissions: 
+    dreamSkull.reload:
+        description: Allow you to reload config of DreamSkull
+        default: op
