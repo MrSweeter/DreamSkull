@@ -1,4 +1,4 @@
-package Events;
+package com.mrsweeter.plugin.Events;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import com.MrSweeter.DreamSkull.DreamSkull;
+import com.mrsweeter.plugin.DreamSkull;
 
 public class Dead implements Listener {
 	

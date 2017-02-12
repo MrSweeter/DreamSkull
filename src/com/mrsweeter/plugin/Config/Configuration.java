@@ -1,6 +1,6 @@
-package Config;
+package com.mrsweeter.plugin.Config;
 
-import com.MrSweeter.DreamSkull.DreamSkull;
+import com.mrsweeter.plugin.DreamSkull;
 
 public class Configuration {
 	

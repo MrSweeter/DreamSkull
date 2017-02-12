@@ -1,10 +1,10 @@
-package Commands;
+package com.mrsweeter.plugin.Commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.MrSweeter.DreamSkull.DreamSkull;
+import com.mrsweeter.plugin.DreamSkull;
 
 public class Commands implements CommandExecutor	{
 	
@@ -19,7 +19,7 @@ public class Commands implements CommandExecutor	{
 		
 		if(sender.hasPermission("dreamSkull.reload")){
 			if (commandLabel.toLowerCase().equals("dsreload") || args.length != 0)	{
-				Config.Configuration.loadConfig(pl);
+				com.mrsweeter.plugin.Config.Configuration.loadConfig(pl);
 				sender.sendMessage("§c[§aDreamSkull§c] §7Reload complete !");
 				return true;
 			}

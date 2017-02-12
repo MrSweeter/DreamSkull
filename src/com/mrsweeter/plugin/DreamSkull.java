@@ -1,4 +1,4 @@
-package com.MrSweeter.DreamSkull;
+package com.mrsweeter.plugin;
 
 import java.util.logging.Logger;
 
@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import Commands.Commands;
-import Events.Dead;
+import com.mrsweeter.plugin.Commands.Commands;
+import com.mrsweeter.plugin.Events.Dead;
 
 public class DreamSkull extends JavaPlugin	{
 	
@@ -20,19 +20,19 @@ public class DreamSkull extends JavaPlugin	{
 
 		// Generate/repair config
 		saveDefaultConfig();
-		Config.Configuration.loadConfig(this);
+		com.mrsweeter.plugin.Config.Configuration.loadConfig(this);
 
 		// EventListener
 		pm.registerEvents(new Dead(), this);
 		getCommand("dsreload").setExecutor(new Commands(this));
 
-		log.info("\u001B[32m=============== \u001B[33mDreamSkull enable \u001B[32m===============\u001B[0m");
+		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamSkull enable" + Color.GREEN + " ===============" + Color.RESET);
 
 	}
 
 	public void onDisable() {
 		
-		log.info("\u001B[32m=============== \u001B[33mDreamSkull disable \u001B[32m===============\u001B[0m");
+		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamSkull disable" + Color.GREEN + " ===============" + Color.RESET);
 
 	}
 }
