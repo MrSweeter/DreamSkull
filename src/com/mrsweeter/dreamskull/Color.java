@@ -1,4 +1,4 @@
-package com.mrsweeter.plugin;
+package com.mrsweeter.dreamskull;
 
 public class Color {
 	

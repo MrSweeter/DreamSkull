@@ -1,4 +1,4 @@
-package com.mrsweeter.plugin;
+package com.mrsweeter.dreamskull;
 
 import java.util.logging.Logger;
 
@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.mrsweeter.plugin.Commands.Commands;
-import com.mrsweeter.plugin.Events.Dead;
+import com.mrsweeter.dreamskull.Commands.Commands;
+import com.mrsweeter.dreamskull.Events.Dead;
 
 public class DreamSkull extends JavaPlugin	{
 	
@@ -20,7 +20,7 @@ public class DreamSkull extends JavaPlugin	{
 
 		// Generate/repair config
 		saveDefaultConfig();
-		com.mrsweeter.plugin.Config.Configuration.loadConfig(this);
+		com.mrsweeter.dreamskull.Config.Configuration.loadConfig(this);
 
 		// EventListener
 		pm.registerEvents(new Dead(), this);
