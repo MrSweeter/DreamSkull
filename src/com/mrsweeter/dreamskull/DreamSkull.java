@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.mrsweeter.dreamskull.Commands.Commands;
 import com.mrsweeter.dreamskull.Events.Dead;
+import com.mrsweeter.dreamskull.Events.Ressurect;
 
 public class DreamSkull extends JavaPlugin	{
 	
@@ -15,6 +16,8 @@ public class DreamSkull extends JavaPlugin	{
 	public static PluginManager pm = Bukkit.getPluginManager();
 	public static int chance;
 	public static boolean msg;
+	public static boolean autoKill;
+	public static boolean totem;
 
 	public void onEnable() {
 
@@ -24,6 +27,8 @@ public class DreamSkull extends JavaPlugin	{
 
 		// EventListener
 		pm.registerEvents(new Dead(), this);
+		pm.registerEvents(new Ressurect(), this);
+		
 		getCommand("dsreload").setExecutor(new Commands(this));
 
 		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamSkull enable" + Color.GREEN + " ===============" + Color.RESET);

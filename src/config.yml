@@ -3,3 +3,5 @@
 # Chance to drop: %
 loot_chance: 25
 send_message: true
+drop-allow-totem: true
+auto-kill: false
