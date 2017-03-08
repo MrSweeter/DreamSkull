@@ -18,6 +18,7 @@ public class DreamSkull extends JavaPlugin	{
 	public static boolean msg;
 	public static boolean autoKill;
 	public static boolean totem;
+	public static boolean looting;
 
 	public void onEnable() {
 

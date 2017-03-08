@@ -3,6 +3,8 @@ package com.mrsweeter.dreamskull.Events;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,20 +20,31 @@ public class Dead implements Listener {
 	public void onPlayerDeath (EntityDeathEvent event)	{
 		
 		if (event.getEntity() instanceof Player && event.getEntity().getKiller() instanceof Player)	{
-			if (DreamSkull.autoKill)	{dropTotem(event);}
+			if (DreamSkull.autoKill)	{dropHead(event.getEntity(), event.getEntity().getLocation(), event.getEntity().getKiller());}
+			
 			else if (!DreamSkull.autoKill && !event.getEntity().getName().equals(event.getEntity().getKiller().getName()))	{
-				dropTotem(event);
+				dropHead(event.getEntity(), event.getEntity().getLocation(), event.getEntity().getKiller());
 			}
 		}
 	}
 
-	private void dropTotem(EntityDeathEvent event) {
+	protected static void dropHead(Entity ent, Location paramLoc, Player killer) {
 		int random = (int) (Math.random() * 100);
 		int chance = DreamSkull.chance;
 		
+		if (DreamSkull.looting)	{
+			
+			ItemStack itemKill = killer.getInventory().getItemInMainHand();
+			
+			if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
+				int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
+				chance += lvl * 10;
+			}
+		}
+		System.out.println(chance);
 		if (random <= chance)	{
-			Player p = (Player) event.getEntity();
-			Location loc = event.getEntity().getLocation();
+			Player p = (Player) ent;
+			Location loc = paramLoc;
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);
 			SkullMeta meta = (SkullMeta) skull.getItemMeta();
 			meta.setOwner(p.getName());

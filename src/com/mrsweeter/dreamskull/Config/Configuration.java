@@ -11,6 +11,7 @@ public class Configuration {
 		DreamSkull.msg = pl.getConfig().getBoolean("send_message");
 		DreamSkull.totem = pl.getConfig().getBoolean("drop-allow-totem");
 		DreamSkull.autoKill = pl.getConfig().getBoolean("auto-kill");
+		DreamSkull.looting = pl.getConfig().getBoolean("looting-influence");
 	}
 
 }
