@@ -7,3 +7,7 @@ looting-influence: true
 
 # Chance to drop: %
 player: 20
+creeper: 50
+zombie: 100
+ghast: 50
+villager: 20
