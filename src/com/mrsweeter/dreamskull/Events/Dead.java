@@ -28,7 +28,7 @@ public class Dead implements Listener {
 		}
 	}
 
-	protected static void dropHead(Entity ent, Location paramLoc, Player killer) {
+	static void dropHead(Entity ent, Location paramLoc, Player killer) {
 		int random = (int) (Math.random() * 100);
 		int chance = DreamSkull.chance;
 		
@@ -41,7 +41,7 @@ public class Dead implements Listener {
 				chance += lvl * 10;
 			}
 		}
-		System.out.println(chance);
+		
 		if (random <= chance)	{
 			Player p = (Player) ent;
 			Location loc = paramLoc;

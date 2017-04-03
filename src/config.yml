@@ -1,8 +1,9 @@
 # DreamSkull
 
-# Chance to drop: %
-loot_chance: 20
 send_message: true
 drop-allow-totem: true
 auto-kill: false
 looting-influence: true
+
+# Chance to drop: %
+player: 20
