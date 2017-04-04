@@ -7,4 +7,10 @@ looting-influence: true
 looting-pct-more: 10
 
 # Chance to drop: %
-player: 10
+entities:
+  player: 10
+  creeper: 50
+  ghast: 50
+  zombie: 100
+  villager: 20
+  bat: 10

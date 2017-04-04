@@ -13,6 +13,7 @@ public class Configuration {
 		DreamSkull.autoKill = pl.getConfig().getBoolean("auto-kill");
 		DreamSkull.looting = pl.getConfig().getBoolean("looting-influence");
 		DreamSkull.loot_pct = pl.getConfig().getInt("looting-pct-more");
+		DreamSkull.valid = pl.getConfig().getConfigurationSection("entities");
 	}
 
 }

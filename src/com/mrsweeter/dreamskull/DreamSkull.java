@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,14 +24,13 @@ public class DreamSkull extends JavaPlugin	{
 	public static boolean looting;
 	public static int loot_pct;
 	public static Map<String, String> validEntities = new HashMap<String, String>();
-	private static FileConfiguration config;
+	public static ConfigurationSection valid;
 	
 
 	public void onEnable() {
 
 		// Generate/repair config
 		saveDefaultConfig();
-		config = this.getConfig();
 		com.mrsweeter.dreamskull.Config.Configuration.loadConfig(this);
 		com.mrsweeter.dreamskull.Config.ValidEntity.loadEntities();
 
@@ -50,9 +49,5 @@ public class DreamSkull extends JavaPlugin	{
 		
 		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamSkull disable" + Color.GREEN + " ===============" + Color.RESET);
 
-	}
-
-	public static FileConfiguration getConfiguration() {
-		return config;
 	}
 }

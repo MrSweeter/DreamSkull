@@ -31,9 +31,9 @@ public class Dead implements Listener {
 	static void dropHead(Entity ent, Location paramLoc, Player killer) {
 		int random = (int) (Math.random() * 100);
 		int chance = 0;
-		if (DreamSkull.getConfiguration().contains("player"))	{
+		if (DreamSkull.valid.contains("player"))	{
 			
-			chance = DreamSkull.getConfiguration().getInt("player");
+			chance = DreamSkull.valid.getInt("player");
 			
 			if (DreamSkull.looting && chance != 0)	{
 				

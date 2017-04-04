@@ -25,7 +25,7 @@ public class KillEntity implements Listener {
 			String ent = event.getEntityType().toString().toLowerCase();
 			
 			if (!ent.equals("player") && DreamSkull.validEntities.containsKey(ent))	{
-				if (DreamSkull.getConfiguration().contains(ent))	{
+				if (DreamSkull.valid.contains(ent))	{
 					dropEntityHead(event.getEntity(), event.getEntity().getLocation(), player);
 				} else {
 					if (player.isOp())	{
@@ -39,7 +39,7 @@ public class KillEntity implements Listener {
 	static void dropEntityHead(Entity ent, Location paramLoc, Player killer) {
 		
 		int random = (int) (Math.random() * 100);
-		int chance = DreamSkull.getConfiguration().getInt(ent.getType().toString().toLowerCase());
+		int chance = DreamSkull.valid.getInt(ent.getType().toString().toLowerCase());
 		
 		if (DreamSkull.looting)	{
 			
