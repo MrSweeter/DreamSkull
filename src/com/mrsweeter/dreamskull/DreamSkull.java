@@ -18,13 +18,14 @@ public class DreamSkull extends JavaPlugin	{
 	
 	Logger log = Logger.getLogger("Minecraft");
 	public static PluginManager pm = Bukkit.getPluginManager();
-	public static int chance;
 	public static boolean msg;
 	public static boolean autoKill;
 	public static boolean totem;
 	public static boolean looting;
+	public static int loot_pct;
 	public static Map<String, String> validEntities = new HashMap<String, String>();
 	private static FileConfiguration config;
+	
 
 	public void onEnable() {
 

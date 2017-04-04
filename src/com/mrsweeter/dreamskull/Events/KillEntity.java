@@ -24,7 +24,7 @@ public class KillEntity implements Listener {
 			Player player = event.getEntity().getKiller();
 			String ent = event.getEntityType().toString().toLowerCase();
 			
-			if (DreamSkull.validEntities.containsKey(ent))	{
+			if (!ent.equals("player") && DreamSkull.validEntities.containsKey(ent))	{
 				if (DreamSkull.getConfiguration().contains(ent))	{
 					dropEntityHead(event.getEntity(), event.getEntity().getLocation(), player);
 				} else {
@@ -47,7 +47,7 @@ public class KillEntity implements Listener {
 			
 			if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
 				int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
-				chance += lvl * 10;
+				chance += lvl * DreamSkull.loot_pct;
 			}
 		}
 		
@@ -66,6 +66,9 @@ public class KillEntity implements Listener {
 				break;
 			case CREEPER:
 				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)4);
+				break;
+			case ENDER_DRAGON:
+				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)5);
 				break;
 			default:
 				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);

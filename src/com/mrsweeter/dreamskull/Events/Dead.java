@@ -20,9 +20,9 @@ public class Dead implements Listener {
 	public void onPlayerDeath (EntityDeathEvent event)	{
 		
 		if (event.getEntity() instanceof Player && event.getEntity().getKiller() instanceof Player)	{
-			if (DreamSkull.autoKill)	{dropHead(event.getEntity(), event.getEntity().getLocation(), event.getEntity().getKiller());}
-			
-			else if (!DreamSkull.autoKill && !event.getEntity().getName().equals(event.getEntity().getKiller().getName()))	{
+			if (DreamSkull.autoKill)	{
+				dropHead(event.getEntity(), event.getEntity().getLocation(), event.getEntity().getKiller());
+			} else if (!DreamSkull.autoKill && !event.getEntity().getName().equals(event.getEntity().getKiller().getName()))	{
 				dropHead(event.getEntity(), event.getEntity().getLocation(), event.getEntity().getKiller());
 			}
 		}
@@ -30,29 +30,33 @@ public class Dead implements Listener {
 
 	static void dropHead(Entity ent, Location paramLoc, Player killer) {
 		int random = (int) (Math.random() * 100);
-		int chance = DreamSkull.chance;
-		
-		if (DreamSkull.looting)	{
+		int chance = 0;
+		if (DreamSkull.getConfiguration().contains("player"))	{
 			
-			ItemStack itemKill = killer.getInventory().getItemInMainHand();
+			chance = DreamSkull.getConfiguration().getInt("player");
 			
-			if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
-				int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
-				chance += lvl * 10;
+			if (DreamSkull.looting && chance != 0)	{
+				
+				ItemStack itemKill = killer.getInventory().getItemInMainHand();
+				
+				if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
+					int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
+					chance += lvl * DreamSkull.loot_pct;
+				}
 			}
-		}
-		
-		if (random <= chance)	{
-			Player p = (Player) ent;
-			Location loc = paramLoc;
-			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);
-			SkullMeta meta = (SkullMeta) skull.getItemMeta();
-			meta.setOwner(p.getName());
-			skull.setItemMeta(meta);
-			p.getWorld().dropItem(loc, skull);
-			if (DreamSkull.msg)	{
-				p.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, p.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
-				p.getKiller().sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + p.getName() + " §7en le tuant !");
+			
+			if (random <= chance)	{
+				Player p = (Player) ent;
+				Location loc = paramLoc;
+				ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);
+				SkullMeta meta = (SkullMeta) skull.getItemMeta();
+				meta.setOwner(p.getName());
+				skull.setItemMeta(meta);
+				p.getWorld().dropItem(loc, skull);
+				if (DreamSkull.msg)	{
+					p.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, p.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
+					p.getKiller().sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + p.getName() + " §7en le tuant !");
+				}
 			}
 		}
 	}

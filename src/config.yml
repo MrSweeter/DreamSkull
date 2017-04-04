@@ -4,10 +4,7 @@ send_message: true
 drop-allow-totem: true
 auto-kill: false
 looting-influence: true
+looting-pct-more: 10
 
 # Chance to drop: %
-player: 20
-creeper: 50
-zombie: 100
-ghast: 50
-villager: 20
+player: 10
