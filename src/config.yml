@@ -1,16 +1,17 @@
 # DreamSkull
 
 send_message: true
+op_message: true
 drop-allow-totem: true
 auto-kill: false
 looting-influence: true
-looting-pct-more: 10
+looting-pct-more: 10.8
 
 # Chance to drop: %
 entities:
   player: 10
   creeper: 50
-  ghast: 50
+  ghast: 49.95
   zombie: 100
   villager: 20
-  bat: 10
+  bat: 0.1

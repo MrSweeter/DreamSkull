@@ -10,7 +10,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.mrsweeter.dreamskull.Commands.Commands;
-import com.mrsweeter.dreamskull.Events.Dead;
 import com.mrsweeter.dreamskull.Events.KillEntity;
 import com.mrsweeter.dreamskull.Events.Ressurect;
 
@@ -19,6 +18,7 @@ public class DreamSkull extends JavaPlugin	{
 	Logger log = Logger.getLogger("Minecraft");
 	public static PluginManager pm = Bukkit.getPluginManager();
 	public static boolean msg;
+	public static boolean op_msg;
 	public static boolean autoKill;
 	public static boolean totem;
 	public static boolean looting;
@@ -35,7 +35,6 @@ public class DreamSkull extends JavaPlugin	{
 		com.mrsweeter.dreamskull.Config.ValidEntity.loadEntities();
 
 		// EventListener
-		pm.registerEvents(new Dead(), this);
 		pm.registerEvents(new Ressurect(), this);
 		pm.registerEvents(new KillEntity(), this);
 		

@@ -19,17 +19,30 @@ public class KillEntity implements Listener {
 	@EventHandler
 	public void onKillEntity(EntityDeathEvent event)	{
 		
+		Entity victim = event.getEntity();
+		
 		if (event.getEntity().getKiller() instanceof Player)	{
 			
-			Player player = event.getEntity().getKiller();
-			String ent = event.getEntityType().toString().toLowerCase();
+			Player killer = event.getEntity().getKiller();
+			String entName = event.getEntityType().toString().toLowerCase();
 			
-			if (!ent.equals("player") && DreamSkull.validEntities.containsKey(ent))	{
-				if (DreamSkull.valid.contains(ent))	{
-					dropEntityHead(event.getEntity(), event.getEntity().getLocation(), player);
+			if (DreamSkull.validEntities.containsKey(entName))	{
+				if (DreamSkull.valid.contains(entName))	{
+					if (victim instanceof Player)	{
+						// Kill PvP
+						if (DreamSkull.autoKill)	{
+							// autoKill allow (true) --> drop head allow
+							dropEntityHead(victim, victim.getLocation(), killer);
+						} else if (!DreamSkull.autoKill && !victim.getName().equals(killer.getName()))	{
+							// autoKill disallow (false) --> victimName != killerName --> drop head allow
+							dropEntityHead(victim, victim.getLocation(), killer);
+						}
+					} else {
+						dropEntityHead(event.getEntity(), event.getEntity().getLocation(), killer);
+					}
 				} else {
-					if (player.isOp())	{
-						player.sendMessage("§c[§aDreamSkull§c] §7Entity §c" + ent + "§7 is configurable, please check config.yml");
+					if (killer.isOp() && DreamSkull.op_msg)	{
+						killer.sendMessage("§c[§aDreamSkull§c] §7Entity §c" + entName + "§7 is configurable, please check config.yml");
 					}
 				}
 			}
@@ -38,8 +51,8 @@ public class KillEntity implements Listener {
 	
 	static void dropEntityHead(Entity ent, Location paramLoc, Player killer) {
 		
-		int random = (int) (Math.random() * 100);
-		int chance = DreamSkull.valid.getInt(ent.getType().toString().toLowerCase());
+		int random = (int) (Math.random() * 10000);
+		int chance = (int) (DreamSkull.valid.getDouble(ent.getType().toString().toLowerCase())*100);
 		
 		if (DreamSkull.looting)	{
 			
@@ -54,6 +67,9 @@ public class KillEntity implements Listener {
 		if (random <= chance)	{
 			Location loc = paramLoc;
 			ItemStack skull;
+			
+			String entName = ent.getType().toString().toUpperCase();
+			
 			switch (ent.getType())	{
 			case ZOMBIE:
 				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)2);
@@ -70,6 +86,13 @@ public class KillEntity implements Listener {
 			case ENDER_DRAGON:
 				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)5);
 				break;
+			case PLAYER:
+				entName = ent.getName();
+				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);
+				SkullMeta metaP = (SkullMeta) skull.getItemMeta();
+				metaP.setOwner(entName);
+				skull.setItemMeta(metaP);
+				break;
 			default:
 				skull = new ItemStack(Material.SKULL_ITEM, 1,(byte)3);
 				SkullMeta meta = (SkullMeta) skull.getItemMeta();
@@ -80,7 +103,7 @@ public class KillEntity implements Listener {
 			killer.getWorld().dropItem(loc, skull);
 			if (DreamSkull.msg)	{
 				ent.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, ent.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
-				killer.sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + ent.getType().toString().toUpperCase() + " §7en le tuant !");
+				killer.sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + entName + " §7en le tuant !");
 			}
 		}
 	}
