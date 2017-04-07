@@ -42,7 +42,11 @@ public class DreamSkull extends JavaPlugin	{
 		getCommand("dsreload").setExecutor(new Commands(this));
 
 		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamSkull enable" + Color.GREEN + " ===============" + Color.RESET);
-
+		
+		Updater updater = new Updater(37538);
+		if (updater.checkUpdate(this.getDescription().getVersion()) && Updater.updateAvailable())	{
+			log.warning(Color.RED + "=============== A newest version of DreamSkull is available ===============" + Color.RESET);
+		}
 	}
 
 	public void onDisable() {
