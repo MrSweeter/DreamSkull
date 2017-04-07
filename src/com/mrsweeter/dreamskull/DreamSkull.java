@@ -23,6 +23,7 @@ public class DreamSkull extends JavaPlugin	{
 	public static boolean totem;
 	public static boolean looting;
 	public static int loot_pct;
+	public static boolean spawn_loot;
 	public static Map<String, String> validEntities = new HashMap<String, String>();
 	public static ConfigurationSection valid;
 	

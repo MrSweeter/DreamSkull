@@ -14,6 +14,7 @@ public class Configuration {
 		DreamSkull.autoKill = pl.getConfig().getBoolean("auto-kill");
 		DreamSkull.looting = pl.getConfig().getBoolean("looting-influence");
 		DreamSkull.loot_pct = (int) (pl.getConfig().getDouble("looting-pct-more")*100);
+		DreamSkull.spawn_loot = pl.getConfig().getBoolean("spawner-loot");
 		DreamSkull.valid = pl.getConfig().getConfigurationSection("entities");
 	}
 

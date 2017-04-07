@@ -1,11 +1,19 @@
 # DreamSkull
 
+# Messages
 send_message: true
 op_message: true
+
+# PvP
 drop-allow-totem: true
 auto-kill: false
+
+# Looting
 looting-influence: true
 looting-pct-more: 10.8
+
+# Spawner
+spawner-loot: false
 
 # Chance to drop: %
 entities:

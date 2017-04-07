@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.SpawnerSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -37,7 +38,7 @@ public class KillEntity implements Listener {
 							// autoKill disallow (false) --> victimName != killerName --> drop head allow
 							dropEntityHead(victim, victim.getLocation(), killer);
 						}
-					} else {
+					} else if (!victim.getScoreboardTags().contains("msd_spawn"))	{
 						dropEntityHead(event.getEntity(), event.getEntity().getLocation(), killer);
 					}
 				} else {
@@ -105,6 +106,15 @@ public class KillEntity implements Listener {
 				ent.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, ent.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
 				killer.sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + entName + " §7en le tuant !");
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onSpawnerSpawn(SpawnerSpawnEvent event)	{
+		
+		if (!DreamSkull.spawn_loot)	{
+			Entity ent = event.getEntity();
+			ent.addScoreboardTag("msd_spawn");
 		}
 	}
 }
