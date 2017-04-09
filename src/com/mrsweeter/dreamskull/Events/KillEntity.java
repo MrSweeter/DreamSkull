@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.mrsweeter.dreamskull.DreamSkull;
+import com.mrsweeter.dreamskull.Config.Statistics;
 
 public class KillEntity implements Listener {
 	
@@ -31,13 +32,16 @@ public class KillEntity implements Listener {
 				if (DreamSkull.valid.contains(entName))	{
 					if (victim instanceof Player)	{
 						// Kill PvP
-						if (DreamSkull.autoKill)	{
-							// autoKill allow (true) --> drop head allow
-							dropEntityHead(victim, victim.getLocation(), killer);
-						} else if (!DreamSkull.autoKill && !victim.getName().equals(killer.getName()))	{
-							// autoKill disallow (false) --> victimName != killerName --> drop head allow
-							dropEntityHead(victim, victim.getLocation(), killer);
+						if (!DreamSkull.statsP || Statistics.checkStatistic(killer, (Player) victim))	{
+							if (DreamSkull.autoKill)	{
+								// autoKill allow (true) --> drop head allow
+								dropEntityHead(victim, victim.getLocation(), killer);
+							} else if (!DreamSkull.autoKill && !victim.getName().equals(killer.getName()))	{
+								// autoKill disallow (false) --> victimName != killerName --> drop head allow
+								dropEntityHead(victim, victim.getLocation(), killer);
+							}
 						}
+						
 					} else if (!victim.getScoreboardTags().contains("msd_spawn"))	{
 						dropEntityHead(event.getEntity(), event.getEntity().getLocation(), killer);
 					}
@@ -61,7 +65,7 @@ public class KillEntity implements Listener {
 			
 			if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
 				int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
-				chance += lvl * DreamSkull.loot_pct;
+				chance += lvl * DreamSkull.loot_pct * 100;
 			}
 		}
 		

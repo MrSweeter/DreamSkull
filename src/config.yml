@@ -7,6 +7,7 @@ op_message: true
 # PvP
 drop-allow-totem: true
 auto-kill: false
+stats-active: true
 
 # Looting
 looting-influence: true

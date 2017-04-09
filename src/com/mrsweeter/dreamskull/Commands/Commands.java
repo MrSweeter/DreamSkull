@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.mrsweeter.dreamskull.DreamSkull;
+import com.mrsweeter.dreamskull.Config.Configuration;
 
 public class Commands implements CommandExecutor	{
 	
@@ -19,7 +20,8 @@ public class Commands implements CommandExecutor	{
 		
 		if(sender.hasPermission("dreamSkull.reload")){
 			if (commandLabel.toLowerCase().equals("dsreload") || args.length != 0)	{
-				com.mrsweeter.dreamskull.Config.Configuration.loadConfig(pl);
+				Configuration.loadConfig(pl);
+				DreamSkull.stats.reload();
 				sender.sendMessage("§c[§aDreamSkull§c] §7Reload complete");
 				return true;
 			}

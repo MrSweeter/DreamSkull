@@ -16,6 +16,7 @@ public class Configuration {
 		DreamSkull.loot_pct = (int) (pl.getConfig().getDouble("looting-pct-more")*100);
 		DreamSkull.spawn_loot = pl.getConfig().getBoolean("spawner-loot");
 		DreamSkull.valid = pl.getConfig().getConfigurationSection("entities");
+		DreamSkull.statsP = pl.getConfig().getBoolean("stats-active");
 	}
 
 }
