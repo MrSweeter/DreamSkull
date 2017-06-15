@@ -4,6 +4,12 @@
 send_message: true
 op_message: true
 
+# Lang
+color: '&'
+configurable: '&7Entity &c{ENTITY}&7 is configurable, please check config.yml'
+loot: '&7You drop &c{ENTITY}&7 head !'
+reload: '&7Reload complete'
+
 # PvP
 drop-allow-totem: true
 auto-kill: false

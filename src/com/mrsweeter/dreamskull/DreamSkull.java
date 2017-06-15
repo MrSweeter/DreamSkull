@@ -29,6 +29,10 @@ public class DreamSkull extends JavaPlugin	{
 	public static ConfigurationSection valid;
 	public static PluginConfiguration stats;
 	public static boolean statsP;
+	public static String reloadMsg = "";
+	public static String colorCode = "";
+	public static String configurableMsg = "";
+	public static String lootMsg = "";
 	
 
 	public void onEnable() {
@@ -39,7 +43,7 @@ public class DreamSkull extends JavaPlugin	{
 		com.mrsweeter.dreamskull.Config.ValidEntity.loadEntities();
 
 		// EventListener
-		pm.registerEvents(new KillEntity(), this);
+		pm.registerEvents(new KillEntity(this), this);
 		
 		String spigotV = Bukkit.getServer().getVersion();
 		String version = spigotV.substring(spigotV.indexOf('(')+5, spigotV.lastIndexOf(')'));
@@ -48,7 +52,7 @@ public class DreamSkull extends JavaPlugin	{
 		if (version.startsWith("1.10") || version.startsWith("1.9"))	{
 			log.warning(Color.RED + "=============== -drop-allow-totem- option in config.yml is useless in " + version + " ===============" + Color.RESET);
 		} else {
-			pm.registerEvents(new Ressurect(), this);
+			pm.registerEvents(new Ressurect(this), this);
 		}
 		
 		stats = new PluginConfiguration(this, "stats.yml");

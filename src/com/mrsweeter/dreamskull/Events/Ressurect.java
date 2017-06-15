@@ -11,6 +11,12 @@ import com.mrsweeter.dreamskull.DreamSkull;
 
 public class Ressurect implements Listener {
 	
+	DreamSkull pl;
+	
+	public Ressurect(DreamSkull main) {
+		pl = main;
+	}
+	
 	@EventHandler
 	public void onPlayerDeath (EntityResurrectEvent event)	{
 		
@@ -23,7 +29,7 @@ public class Ressurect implements Listener {
 			if (p.getInventory().getItemInMainHand().getType() == Material.TOTEM
 				|| p.getInventory().getItemInOffHand().getType() == Material.TOTEM)	{
 				
-				KillEntity.dropEntityHead(victim, victim.getLocation(), event.getEntity().getKiller());
+				KillEntity.dropEntityHead(pl, victim, victim.getLocation(), event.getEntity().getKiller());
 			}
 		}
 	}

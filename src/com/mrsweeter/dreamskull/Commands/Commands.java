@@ -22,7 +22,7 @@ public class Commands implements CommandExecutor	{
 			if (commandLabel.toLowerCase().equals("dsreload") || args.length != 0)	{
 				Configuration.loadConfig(pl);
 				DreamSkull.stats.reload();
-				sender.sendMessage("§c[§aDreamSkull§c] §7Reload complete");
+				sender.sendMessage("§c[§aDreamSkull§c] " + DreamSkull.reloadMsg);
 				return true;
 			}
 		} else	{

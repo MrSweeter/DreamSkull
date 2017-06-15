@@ -18,6 +18,12 @@ import com.mrsweeter.dreamskull.Config.Statistics;
 
 public class KillEntity implements Listener {
 	
+	DreamSkull pl;
+	
+	public KillEntity(DreamSkull main) {
+		pl = main;
+	}
+	
 	@EventHandler
 	public void onKillEntity(EntityDeathEvent event)	{
 		
@@ -35,26 +41,31 @@ public class KillEntity implements Listener {
 						if (!DreamSkull.statsP || Statistics.checkStatistic(killer, (Player) victim))	{
 							if (DreamSkull.autoKill)	{
 								// autoKill allow (true) --> drop head allow
-								dropEntityHead(victim, victim.getLocation(), killer);
+								dropEntityHead(pl, victim, victim.getLocation(), killer);
 							} else if (!DreamSkull.autoKill && !victim.getName().equals(killer.getName()))	{
 								// autoKill disallow (false) --> victimName != killerName --> drop head allow
-								dropEntityHead(victim, victim.getLocation(), killer);
+								dropEntityHead(pl, victim, victim.getLocation(), killer);
 							}
 						}
 						
 					} else if (!victim.getScoreboardTags().contains("msd_spawn"))	{
-						dropEntityHead(event.getEntity(), event.getEntity().getLocation(), killer);
+						dropEntityHead(pl, event.getEntity(), event.getEntity().getLocation(), killer);
 					}
 				} else {
 					if (killer.isOp() && DreamSkull.op_msg)	{
-						killer.sendMessage("§c[§aDreamSkull§c] §7Entity §c" + entName + "§7 is configurable, please check config.yml");
+						
+						String str = pl.getConfig().getString("configurable");
+						str = str.replace(pl.getConfig().getString("color"), "§");
+						str = str.replace("{ENTITY}", entName);
+						
+						killer.sendMessage("§c[§aDreamSkull§c] " + DreamSkull.configurableMsg.replace("{ENTITY}", entName));
 					}
 				}
 			}
 		}
 	}
 	
-	static void dropEntityHead(Entity ent, Location paramLoc, Player killer) {
+	static void dropEntityHead(DreamSkull pl, Entity ent, Location paramLoc, Player killer) {
 		
 		int random = (int) (Math.random() * 10000);
 		int chance = (int) (DreamSkull.valid.getDouble(ent.getType().toString().toLowerCase())*100);
@@ -65,7 +76,7 @@ public class KillEntity implements Listener {
 			
 			if (itemKill.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))	{
 				int lvl = itemKill.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
-				chance += lvl * DreamSkull.loot_pct * 100;
+				chance += lvl * DreamSkull.loot_pct;
 			}
 		}
 		
@@ -108,7 +119,8 @@ public class KillEntity implements Listener {
 			killer.getWorld().dropItem(loc, skull);
 			if (DreamSkull.msg)	{
 				ent.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, ent.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
-				killer.sendMessage("§c[§aDreamSkull§c] §7Vous avez looté la tête de §c" + entName + " §7en le tuant !");
+				
+				killer.sendMessage("§c[§aDreamSkull§c] " + DreamSkull.lootMsg.replace("{ENTITY}", entName));
 			}
 		}
 	}

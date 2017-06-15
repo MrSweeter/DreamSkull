@@ -17,6 +17,10 @@ public class Configuration {
 		DreamSkull.spawn_loot = pl.getConfig().getBoolean("spawner-loot");
 		DreamSkull.valid = pl.getConfig().getConfigurationSection("entities");
 		DreamSkull.statsP = pl.getConfig().getBoolean("stats-active");
+		DreamSkull.colorCode = pl.getConfig().getString("color");
+		DreamSkull.reloadMsg = pl.getConfig().getString("reload").replace(DreamSkull.colorCode, "§");
+		DreamSkull.configurableMsg = pl.getConfig().getString("configurable").replace(DreamSkull.colorCode, "§");
+		DreamSkull.lootMsg = pl.getConfig().getString("loot").replace(DreamSkull.colorCode, "§");
 	}
 
 }
